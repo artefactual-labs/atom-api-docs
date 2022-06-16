@@ -17,8 +17,11 @@
   "paths": {
     "/api": {
       "get": {
-        "summary": "Get application version",
-        "operationId": "index",
+        "summary": "Get AtoM version",
+        "operationId": "version",
+        "tags": [
+          "application"
+        ],
         "responses": {
           "200": {
             "description": "The AtoM version number",
@@ -39,16 +42,36 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Not authorized error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401NotAuthorizedError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/500InternalError"
+                }
+              }
+            }
           }
         }
       }
     },
     "/api/informationobjects": {
       "get": {
-        "summary": "List all information objects with summary data",
+        "summary": "A paged array of information objects with summary data",
         "operationId": "informationobjectsBrowse",
         "tags": [
-          "information object"
+          "informationobjects"
         ],
         "parameters": [
           {
@@ -63,7 +86,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A paged array of information objects",
+            "description": "A paged array of information objects with summary data",
             "content": {
               "application/json": {
                 "schema": {
@@ -72,12 +95,22 @@
               }
             }
           },
-          "default": {
-            "description": "unexpected error",
+          "401": {
+            "description": "Not authorized error",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/401NotAuthorizedError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/500InternalError"
                 }
               }
             }
@@ -86,20 +119,66 @@
       },
       "post": {
         "summary": "Create a new information object",
-        "operationId": "informationObjectCreate",
+        "operationId": "informationbjectsCreate",
         "tags": [
-          "information object"
+          "informationobjects"
         ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SfCulture"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InformationObjectCreateBody"
+              }
+            }
+          }
+        },
         "responses": {
           "201": {
-            "description": "Null response"
-          },
-          "default": {
-            "description": "unexpected error",
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "slug": {
+                      "type": "string"
+                    },
+                    "parent_id": {
+                      "type": "integer"
+                    }
+                  },
+                  "example": {
+                    "id": 2004327,
+                    "slug": "woolworth-building-sudbury-ontario",
+                    "parent_id": 71473
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401NotAuthorizedError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/500InternalError"
                 }
               }
             }
@@ -109,39 +188,297 @@
     },
     "/api/informationobjects/{slug}": {
       "get": {
-        "summary": "Detailed data for the requested information object",
+        "summary": "Detailed information object data",
         "operationId": "informationobjectsRead",
         "tags": [
-          "information object"
+          "informationobjects"
         ],
         "parameters": [
           {
-            "name": "slug",
-            "in": "path",
-            "required": true,
-            "description": "The slug of the information object to retrieve",
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/Slug"
+          },
+          {
+            "$ref": "#/components/parameters/SfCulture"
           }
         ],
         "responses": {
           "200": {
-            "description": "Expected response to a valid request",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "nullable": true
+                  "$ref": "#/components/schemas/InformationObjectFull"
                 }
               }
             }
           },
-          "default": {
-            "description": "unexpected error",
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401NotAuthorizedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "id": "not-found",
+                  "message": "Information object not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/500InternalError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an information object",
+        "operationId": "informationobjectsUpdate",
+        "tags": [
+          "informationobjects"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Slug"
+          },
+          {
+            "$ref": "#/components/parameters/SfCulture"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InformationObjectUpdateBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "parent_id": {
+                      "type": "integer"
+                    }
+                  },
+                  "example": {
+                    "id": 2004327,
+                    "parent_id": 71473
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401NotAuthorizedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "id": "not-found",
+                  "message": "Information object not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/500InternalError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an information object",
+        "operationId": "informationobjectsDelete",
+        "tags": [
+          "informationobjects"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Slug"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401NotAuthorizedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "id": "not-found",
+                  "message": "Information object not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/500InternalError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/informationobjects/{slug}/digitalobject": {
+      "get": {
+        "summary": "Returns a digital object bitstream",
+        "operationId": "informationobjectsDownloadDigitalObject",
+        "tags": [
+          "informationobjects"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Slug"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A binary bitstream. The actual MIME type of the response will vary based on the digital object type (e.g. \"application/pdf\" for a PDF document).",
+            "content": {
+              "application/octet-stream": {}
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401NotAuthorizedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "id": "not-found",
+                  "message": "Information object not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/500InternalError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/informationobjects/tree/{slug}": {
+      "get": {
+        "summary": "Recursive list of information object children",
+        "operationId": "informationobjectsTree",
+        "tags": [
+          "informationobjects"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Slug"
+          },
+          {
+            "$ref": "#/components/parameters/SfCulture"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InformationobjectTree"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/401NotAuthorizedError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/500InternalError"
                 }
               }
             }
@@ -166,7 +503,7 @@
       "SfCulture": {
         "name": "sf_culture",
         "in": "query",
-        "description": "ISO language code (e.g. \"en\", \"fr\") for response data",
+        "description": "ISO language code (e.g. \"en\", \"fr\")",
         "required": false,
         "schema": {
           "type": "string",
@@ -185,6 +522,16 @@
           "default": 0,
           "example": 10
         }
+      },
+      "Slug": {
+        "name": "slug",
+        "in": "path",
+        "required": true,
+        "description": "A resource slug",
+        "schema": {
+          "type": "string",
+          "example": "woolworth-building-sudbury-ontario"
+        }
       }
     },
     "schemas": {
@@ -196,10 +543,13 @@
         "properties": {
           "total": {
             "type": "integer",
+            "description": "Count of all results found",
             "example": 1
           },
           "results": {
+            "type": "array",
             "items": {
+              "type": "object",
               "$ref": "#/components/schemas/InformationObjectBrief"
             }
           }
@@ -207,10 +557,7 @@
       },
       "InformationObjectBrief": {
         "required": [
-          "reference_code",
-          "slug",
-          "title",
-          "physical_characteristics"
+          "slug"
         ],
         "properties": {
           "reference_code": {
@@ -254,37 +601,748 @@
           }
         },
         "example": {
-          "reference_code": "CA ON00311 PF41",
-          "slug": "law-society-of-upper-canada-archives",
-          "title": "John Honsberger fonds",
-          "repository": "The Law Society of Upper Canada Archives",
-          "physical_characteristics": "Some items in the fonds are stored folded.",
+          "reference_code": "CA ON00365 WCH-FAM",
+          "slug": "womens-college-hospital-department-of-family-and-community-medicine-fonds",
+          "title": "Women's College Hospital. Department of Family and Community Medicine fonds",
+          "repository": "Women's College Hospital",
           "level_of_description": "Fonds",
           "creators": [
-            "Honsberger, John David"
+            "Women's College Hospital. Department of Family and Community Medicine"
           ],
           "creation_dates": [
-            "1763-2012"
+            "1976-1999"
           ],
           "place_access_points": [
-            "Toronto"
+            "Toronto",
+            "York, Regional Municipality of",
+            "Ontario",
+            "Canada"
+          ]
+        }
+      },
+      "InformationObjectFull": {
+        "properties": {
+          "parent": {
+            "type": "string"
+          },
+          "reference_code": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "publication_status": {
+            "type": "string"
+          },
+          "level_of_description": {
+            "type": "string"
+          },
+          "extent_and_medium": {
+            "type": "string"
+          },
+          "dates": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "$ref": "#/components/schemas/Dates"
+            }
+          },
+          "creators": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "$ref": "#/components/schemas/Creator"
+            }
+          },
+          "repository": {
+            "type": "string"
+          },
+          "repository_inherited_from": {
+            "type": "string"
+          },
+          "archival_history": {
+            "type": "string"
+          },
+          "immediate_source_of_acquisition_or_transfer": {
+            "type": "string"
+          },
+          "scope_and_content": {
+            "type": "string"
+          },
+          "appraisal_destruction_and_scheduling": {
+            "type": "string"
+          },
+          "accruals": {
+            "type": "string"
+          },
+          "system_of_arrangement": {
+            "type": "string"
+          },
+          "conditions_governing_access": {
+            "type": "string"
+          },
+          "conditions_governing_reproduction": {
+            "type": "string"
+          },
+          "languages_of_material": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "scripts_of_material": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "physical_characteristics_and_technical_requirements": {
+            "type": "string"
+          },
+          "finding_aids": {
+            "type": "string"
+          },
+          "existence_and_location_of_originals": {
+            "type": "string"
+          },
+          "existence_and_location_of_copies": {
+            "type": "string"
+          },
+          "related_units_of_description": {
+            "type": "string"
+          },
+          "related_descriptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "publication_notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "alternative_identifiers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "identifier": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "subject_access_points": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "place_access_points": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "name_access_points": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "description_identifier": {
+            "type": "string"
+          },
+          "institution_identifier": {
+            "type": "string"
+          },
+          "rules_and_or_conventions_used": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "level_of_detail": {
+            "type": "string"
+          },
+          "dates_of_creation_revision_deletion": {
+            "type": "string"
+          },
+          "languages_of_description": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "scripts_of_description": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sources": {
+            "type": "string"
+          },
+          "archivists_notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rights": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "$ref": "#/components/schemas/Rights"
+            }
+          },
+          "digital_object": {
+            "type": "object",
+            "$ref": "#/components/schemas/DigitalObject"
+          }
+        },
+        "example": {
+          "reference_code": "CA ON00362 S714",
+          "title": "Clara Bernhardt fonds",
+          "publication_status": "published",
+          "level_of_description": "Fonds",
+          "extent_and_medium": "1.38 m of textual records\n8 photographs : b&w",
+          "dates": [
+            {
+              "date": "1928-1991",
+              "start_date": "1928-00-00",
+              "end_date": "1991-00-00",
+              "type": "Creation"
+            }
           ],
-          "thumbnail_url": "http://127.0.0.1/uploads/r/law-society-of-upper-canada-archives/2/5/1/251a9152c6e71751519dc49086d62f3abde38d34619f66516ca0edf97076a1cf/honsberger_142.jpg"
+          "creators": [
+            {
+              "authorized_form_of_name": "Bernhardt, Clara, 1911-1993",
+              "dates_of_existence": "1911 - 1993",
+              "history": "Clara Bernhardt (1911-1993) was a poet, novelist, composer, and columnist, who lived in Cambridge, Ontario. At the age of eleven she was stricken with polio and confined to a wheelchair. Although she was unable to pursue more that a Grade 8 education, Bernhardt wrote poetry, articles, and stories. Her newspaper columns circulated in Canada and the United States for more than sixty years, and she was a columnist for the Preston Times Herald (now the Cambridge Times) for thirty years. She published three volumes of poetry, two novels, and a book of songs. In 1991 Clara Bernhardt was presented with the Order of Ontario."
+            }
+          ],
+          "repository": "Wilfrid Laurier University Archives",
+          "immediate_source_of_acquisition_or_transfer": "Fonds acquired from Clara Bernhardt in 1985.",
+          "scope_and_content": "Fonds consists of publications, manuscripts, scrapbooks, personal and business papers, and other materials produced and collected by Clara Bernhardt. Fonds is comprised of the following series: Biographical; Prose; Poetry; Reviews; Music; Personal papers; Business papers; Publications.",
+          "accruals": "No further accruals are expected.",
+          "conditions_governing_access": "Open",
+          "finding_aids": "http:\/\/library.wlu.ca\/specialcollections\/findingaid\/3307",
+          "related_units_of_description": "Related material can be found in the A.M. Hedderick fonds.",
+          "notes": [
+            "Title taken from the contents of the fonds."
+          ],
+          "subject_access_points": [
+            "Women",
+            "Arts and culture"
+          ],
+          "name_access_points": [
+            "Bernhardt, Clara, 1911-1993"
+          ],
+          "digital_object": {
+            "filename": "075948.jpg",
+            "media_type": "Image",
+            "mime_type": "image\/jpeg",
+            "byte_size": 11622,
+            "url": "http:\/\/images.ourontario.ca\/Partners\/WLU\/075948.jpg",
+            "reference_url": "http:\/\/demo.accesstomemory.org\/uploads\/r\/wilfrid-laurier-university-archives\/7\/c\/c\/7cc4f65335a0881db7909f37d8d7f66c1c63666f13dc8fda2a09d2efcfb3ba96\/075948_141.jpg",
+            "thumbnail_url": "http:\/\/demo.accesstomemory.org\/uploads\/r\/wilfrid-laurier-university-archives\/2\/e\/9\/2e96fc0607a5d32899693929929353015f727eb19ad3782ed836a3d2a1c272f6\/075948_142.jpg"
+          }
+        }
+      },
+      "Dates": {
+        "properties": {
+          "date": {
+            "type": "string"
+          },
+          "start_date": {
+            "type": "string"
+          },
+          "end_date": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "Creator": {
+        "properties": {
+          "authorized_form_of_name": {
+            "type": "string"
+          },
+          "dates_of_existence": {
+            "type": "string"
+          },
+          "history": {
+            "type": "string"
+          },
+          "inherited_from": {
+            "type": "string"
+          }
+        }
+      },
+      "Rights": {
+        "properties": {
+          "basis": {
+            "type": "string"
+          },
+          "start_date": {
+            "type": "string"
+          },
+          "end_date": {
+            "type": "string"
+          },
+          "documentation_identifier_type": {
+            "type": "string"
+          },
+          "documentation_identifier_value": {
+            "type": "string"
+          },
+          "documentation_identifier_role": {
+            "type": "string"
+          },
+          "rights_holder": {
+            "type": "string"
+          },
+          "copyright_status": {
+            "type": "string"
+          },
+          "copyright_status_date": {
+            "type": "string"
+          },
+          "copyright_jurisdiction": {
+            "type": "string"
+          },
+          "copyright_note": {
+            "type": "string"
+          },
+          "license_identifier": {
+            "type": "string"
+          },
+          "license_terms": {
+            "type": "string"
+          },
+          "license_note": {
+            "type": "string"
+          },
+          "statute_jurisdiction": {
+            "type": "string"
+          },
+          "statute_citation": {
+            "type": "string"
+          },
+          "statute_determination_date": {
+            "type": "string"
+          },
+          "statute_note": {
+            "type": "string"
+          },
+          "granted_rights": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "$ref": "#/components/schemas/GrantedRight"
+            }
+          }
+        }
+      },
+      "GrantedRight": {
+        "properties": {
+          "act": {
+            "type": "string"
+          },
+          "restriction": {
+            "type": "string"
+          },
+          "start_date": {
+            "type": "string"
+          },
+          "end_date": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      },
+      "DigitalObject": {
+        "properties": {
+          "filename": {
+            "type": "string"
+          },
+          "media_type": {
+            "type": "string"
+          },
+          "mime_type": {
+            "type": "string"
+          },
+          "byte_size": {
+            "type": "integer"
+          },
+          "uploaded_at": {
+            "type": "string"
+          },
+          "object_uuid": {
+            "type": "string"
+          },
+          "aip_uuid": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "reference_url": {
+            "type": "string"
+          },
+          "thumbnail_url": {
+            "type": "string"
+          }
+        }
+      },
+      "InformationObjectCreateBody": {
+        "properties": {
+          "identifier": {
+            "type": "string"
+          },
+          "level_of_description_id": {
+            "type": "integer"
+          },
+          "parent_id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "parent_slug": {
+            "type": "string",
+            "description": "Overrides parent_id if both are set"
+          },
+          "description": {
+            "type": "string",
+            "description": "Maps to ISAD(G) \"Scope and content\""
+          },
+          "format": {
+            "type": "string",
+            "description": "Maps to ISAD(G) \"Extent and medium\""
+          },
+          "source": {
+            "type": "string",
+            "description": "Maps to ISAD(G) \"Existence and location of originals\""
+          },
+          "rights": {
+            "type": "string",
+            "description": "Maps to ISAD(G) \"Conditions governing access\""
+          },
+          "names": {
+            "type": "object",
+            "description": "Name of creator, accumulator, etc.",
+            "properties": {
+              "authorized_form_of_name": {
+                "type": "string"
+              },
+              "actor_id": {
+                "type": "string",
+                "description": "Overrides authorized_form_of_name if both are set"
+              },
+              "type_id": {
+                "type": "integer"
+              }
+            }
+          },
+          "dates": {
+            "type": "object",
+            "description": "Date of creation",
+            "properties": {
+              "date": {
+                "type": "string"
+              },
+              "start_date": {
+                "type": "string"
+              },
+              "end_date": {
+                "type": "string"
+              }
+            }
+          },
+          "notes": {
+            "type": "object",
+            "properties": {
+              "content": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "default": "General note"
+              }
+            }
+          },
+          "types": {
+            "type": "object",
+            "description": "\"Dublin Core Types\" term id",
+            "properties": {
+              "id": {
+                "type": "integer"
+              }
+            }
+          },
+          "level_of_description": {
+            "type": "string",
+            "description": "Overrides level_of_description_id if both are set"
+          }
+        },
+        "example": {
+          "identifier": "2",
+          "title": "Woolworth Building Sudbury, Ontario",
+          "parent_slug": "irving-steinberg-sudbury-slide-collection",
+          "description": "Item is a picture of an office building with \"Woolworths\" \"Crown Life\", and \"Confederation Life\" signs visible. People, the crossing street, and cars also can be seen in the image.",
+          "format": "1 photograph: col, mounted on slide",
+          "source": "Item has been digitized. Prints of image may be requested. Email archives@greatersudbury.ca for more information.",
+          "names": {
+            "authorized_form_of_name": "Steinberg, Israel \"Irving\"",
+            "type_id": 111
+          },
+          "dates": {
+            "date": "1961",
+            "start_date": "1961",
+            "end_date": "1961"
+          },
+          "notes": {
+            "content": "For demonstration purposes only."
+          },
+          "types": {
+            "id": 277
+          },
+          "level_of_description": "Item"
+        }
+      },
+      "InformationObjectUpdateBody": {
+        "properties": {
+          "identifier": {
+            "type": "string"
+          },
+          "level_of_description_id": {
+            "type": "integer"
+          },
+          "parent_id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "description": "Maps to ISAD(G) \"Scope and content\""
+          },
+          "format": {
+            "type": "string",
+            "description": "Maps to ISAD(G) \"Extent and medium\""
+          },
+          "source": {
+            "type": "string",
+            "description": "Maps to ISAD(G) \"Existence and location of originals\""
+          },
+          "rights": {
+            "type": "string",
+            "description": "Maps to ISAD(G) \"Conditions governing access\""
+          },
+          "names": {
+            "type": "object",
+            "description": "Name of creator, accumulator, etc.",
+            "properties": {
+              "authorized_form_of_name": {
+                "type": "string"
+              },
+              "actor_id": {
+                "type": "string",
+                "description": "Overrides authorized_form_of_name if both are set"
+              },
+              "type_id": {
+                "type": "integer"
+              }
+            }
+          },
+          "dates": {
+            "type": "object",
+            "description": "Date of creation",
+            "properties": {
+              "date": {
+                "type": "string"
+              },
+              "start_date": {
+                "type": "string"
+              },
+              "end_date": {
+                "type": "string"
+              }
+            }
+          },
+          "notes": {
+            "type": "object",
+            "properties": {
+              "content": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "default": "General note"
+              }
+            }
+          },
+          "types": {
+            "type": "object",
+            "description": "\"Dublin Core Types\" term id",
+            "properties": {
+              "id": {
+                "type": "integer"
+              }
+            }
+          },
+          "level_of_description": {
+            "type": "string",
+            "description": "Overrides level_of_description_id if both are set"
+          }
+        },
+        "example": {
+          "identifier": "2",
+          "title": "Woolworth Building Sudbury, Ontario",
+          "description": "Item is a picture of an office building with \"Woolworths\" \"Crown Life\", and \"Confederation Life\" signs visible. People, the crossing street, and cars also can be seen in the image.",
+          "format": "1 photograph: col, mounted on slide",
+          "source": "Item has been digitized. Prints of image may be requested. Email archives@greatersudbury.ca for more information.",
+          "names": {
+            "authorized_form_of_name": "Steinberg, Israel \"Irving\"",
+            "type_id": 111
+          },
+          "dates": {
+            "date": "1961",
+            "start_date": "1961",
+            "end_date": "1961"
+          },
+          "notes": {
+            "content": "For demonstration purposes only."
+          },
+          "types": {
+            "id": 277
+          },
+          "level_of_description": "Item"
+        }
+      },
+      "InformationobjectTree": {
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "identifier": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InformationobjectTree"
+            }
+          }
+        },
+        "example": {
+          "title": "Kantokoski (Koski), Koivula & Korpela Family",
+          "identifier": "016",
+          "slug": "kantokoski-koski-koivula-korpela-family-3",
+          "level": "Fonds",
+          "children": [
+            {
+              "title": "Ann Eva Chisholm (nee Kantokoski\/Koski)",
+              "identifier": ".1",
+              "slug": "ann-eva-chisholm-nee-kantokoski-koski-2",
+              "level": "Sous-fonds",
+              "children": [
+                {
+                  "title": "Photographs",
+                  "identifier": "1",
+                  "slug": "photographs-7",
+                  "level": "Series",
+                  "children": [
+                    {
+                      "title": "Finland",
+                      "identifier": "1",
+                      "slug": "finland",
+                      "level": "File",
+                      "children": [
+                        {
+                          "title": "Mr and Mrs Koski",
+                          "identifier": "1",
+                          "slug": "mr-and-mrs-koski",
+                          "level": "Item"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       },
       "Error": {
         "required": [
-          "code",
+          "id",
           "message"
         ],
         "properties": {
-          "code": {
-            "type": "integer",
-            "format": "int32"
+          "id": {
+            "type": "string"
           },
           "message": {
             "type": "string"
           }
+        }
+      },
+      "401NotAuthorizedError": {
+        "required": [
+          "id",
+          "message"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "id": "not-authorized",
+          "message": "Not authorized"
+        }
+      },
+      "500InternalError": {
+        "required": [
+          "id",
+          "message"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "id": "internal-error",
+          "message": "Internal error"
         }
       }
     }
