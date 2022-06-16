@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    environment:
+      SWAGGER_JSON: /src/openapi.json
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/src
