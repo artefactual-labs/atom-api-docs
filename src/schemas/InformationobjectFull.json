@@ -1,0 +1,393 @@
+{
+    "InformationobjectFull": {
+        "properties": {
+            "parent": {
+                "type": "string"
+            },
+            "reference_code": {
+                "type": "string"
+            },
+            "title": {
+                "type": "string"
+            },
+            "publication_status": {
+                "type": "string"
+            },
+            "level_of_description": {
+                "type": "string"
+            },
+            "extent_and_medium": {
+                "type": "string"
+            },
+            "dates": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "$ref": "#/Dates"
+                }
+            },
+            "creators": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "$ref": "#/Creator"
+                }
+            },
+            "repository": {
+                "type": "string"
+            },
+            "repository_inherited_from": {
+                "type": "string"
+            },
+            "archival_history": {
+                "type": "string"
+            },
+            "immediate_source_of_acquisition_or_transfer": {
+                "type": "string"
+            },
+            "scope_and_content": {
+                "type": "string"
+            },
+            "appraisal_destruction_and_scheduling": {
+                "type": "string"
+            },
+            "accruals": {
+                "type": "string"
+            },
+            "system_of_arrangement": {
+                "type": "string"
+            },
+            "conditions_governing_access": {
+                "type": "string"
+            },
+            "conditions_governing_reproduction": {
+                "type": "string"
+            },
+            "languages_of_material": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "scripts_of_material": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "physical_characteristics_and_technical_requirements": {
+                "type": "string"
+            },
+            "finding_aids": {
+                "type": "string"
+            },
+            "existence_and_location_of_originals": {
+                "type": "string"
+            },
+            "existence_and_location_of_copies": {
+                "type": "string"
+            },
+            "related_units_of_description": {
+                "type": "string"
+            },
+            "related_descriptions": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "publication_notes": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "notes": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "alternative_identifiers": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "label": {
+                            "type": "string"
+                        },
+                        "identifier": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "subject_access_points": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "place_access_points": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "name_access_points": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "description_identifier": {
+                "type": "string"
+            },
+            "institution_identifier": {
+                "type": "string"
+            },
+            "rules_and_or_conventions_used": {
+                "type": "string"
+            },
+            "status": {
+                "type": "string"
+            },
+            "level_of_detail": {
+                "type": "string"
+            },
+            "dates_of_creation_revision_deletion": {
+                "type": "string"
+            },
+            "languages_of_description": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "scripts_of_description": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "sources": {
+                "type": "string"
+            },
+            "archivists_notes": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "rights": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "$ref": "#/Rights"
+                }
+            },
+            "digital_object": {
+                "type": "object",
+                "$ref": "#/DigitalObject"
+            }
+        },
+        "example": {
+            "reference_code": "CA ON00362 S714",
+            "title": "Clara Bernhardt fonds",
+            "publication_status": "published",
+            "level_of_description": "Fonds",
+            "extent_and_medium": "1.38 m of textual records\n8 photographs : b&w",
+            "dates": [
+                {
+                    "date": "1928-1991",
+                    "start_date": "1928-00-00",
+                    "end_date": "1991-00-00",
+                    "type": "Creation"
+                }
+            ],
+            "creators": [
+                {
+                    "authorized_form_of_name": "Bernhardt, Clara, 1911-1993",
+                    "dates_of_existence": "1911 - 1993",
+                    "history": "Clara Bernhardt (1911-1993) was a poet, novelist, composer, and columnist, who lived in Cambridge, Ontario. At the age of eleven she was stricken with polio and confined to a wheelchair. Although she was unable to pursue more that a Grade 8 education, Bernhardt wrote poetry, articles, and stories. Her newspaper columns circulated in Canada and the United States for more than sixty years, and she was a columnist for the Preston Times Herald (now the Cambridge Times) for thirty years. She published three volumes of poetry, two novels, and a book of songs. In 1991 Clara Bernhardt was presented with the Order of Ontario."
+                }
+            ],
+            "repository": "Wilfrid Laurier University Archives",
+            "immediate_source_of_acquisition_or_transfer": "Fonds acquired from Clara Bernhardt in 1985.",
+            "scope_and_content": "Fonds consists of publications, manuscripts, scrapbooks, personal and business papers, and other materials produced and collected by Clara Bernhardt. Fonds is comprised of the following series: Biographical; Prose; Poetry; Reviews; Music; Personal papers; Business papers; Publications.",
+            "accruals": "No further accruals are expected.",
+            "conditions_governing_access": "Open",
+            "finding_aids": "http:\/\/library.wlu.ca\/specialcollections\/findingaid\/3307",
+            "related_units_of_description": "Related material can be found in the A.M. Hedderick fonds.",
+            "notes": [
+                "Title taken from the contents of the fonds."
+            ],
+            "subject_access_points": [
+                "Women",
+                "Arts and culture"
+            ],
+            "name_access_points": [
+                "Bernhardt, Clara, 1911-1993"
+            ],
+            "digital_object": {
+                "filename": "075948.jpg",
+                "media_type": "Image",
+                "mime_type": "image\/jpeg",
+                "byte_size": 11622,
+                "url": "http:\/\/images.ourontario.ca\/Partners\/WLU\/075948.jpg",
+                "reference_url": "http:\/\/demo.accesstomemory.org\/uploads\/r\/wilfrid-laurier-university-archives\/7\/c\/c\/7cc4f65335a0881db7909f37d8d7f66c1c63666f13dc8fda2a09d2efcfb3ba96\/075948_141.jpg",
+                "thumbnail_url": "http:\/\/demo.accesstomemory.org\/uploads\/r\/wilfrid-laurier-university-archives\/2\/e\/9\/2e96fc0607a5d32899693929929353015f727eb19ad3782ed836a3d2a1c272f6\/075948_142.jpg"
+            }
+        }
+    },
+    "Dates": {
+        "properties": {
+            "date": {
+                "type": "string"
+            },
+            "start_date": {
+                "type": "string"
+            },
+            "end_date": {
+                "type": "string"
+            },
+            "type": {
+                "type": "string"
+            }
+        }
+    },
+    "Creator": {
+        "properties": {
+            "authorized_form_of_name": {
+                "type": "string"
+            },
+            "dates_of_existence": {
+                "type": "string"
+            },
+            "history": {
+                "type": "string"
+            },
+            "inherited_from": {
+                "type": "string"
+            }
+        }
+    },
+    "Rights": {
+        "properties": {
+            "basis": {
+                "type": "string"
+            },
+            "start_date": {
+                "type": "string"
+            },
+            "end_date": {
+                "type": "string"
+            },
+            "documentation_identifier_type": {
+                "type": "string"
+            },
+            "documentation_identifier_value": {
+                "type": "string"
+            },
+            "documentation_identifier_role": {
+                "type": "string"
+            },
+            "rights_holder": {
+                "type": "string"
+            },
+            "copyright_status": {
+                "type": "string"
+            },
+            "copyright_status_date": {
+                "type": "string"
+            },
+            "copyright_jurisdiction": {
+                "type": "string"
+            },
+            "copyright_note": {
+                "type": "string"
+            },
+            "license_identifier": {
+                "type": "string"
+            },
+            "license_terms": {
+                "type": "string"
+            },
+            "license_note": {
+                "type": "string"
+            },
+            "statute_jurisdiction": {
+                "type": "string"
+            },
+            "statute_citation": {
+                "type": "string"
+            },
+            "statute_determination_date": {
+                "type": "string"
+            },
+            "statute_note": {
+                "type": "string"
+            },
+            "granted_rights": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "$ref": "#/GrantedRight"
+                }
+            }
+        }
+    },
+    "GrantedRight": {
+        "properties": {
+            "act": {
+                "type": "string"
+            },
+            "restriction": {
+                "type": "string"
+            },
+            "start_date": {
+                "type": "string"
+            },
+            "end_date": {
+                "type": "string"
+            },
+            "notes": {
+                "type": "string"
+            }
+        }
+    },
+    "DigitalObject": {
+        "properties": {
+            "filename": {
+                "type": "string"
+            },
+            "media_type": {
+                "type": "string"
+            },
+            "mime_type": {
+                "type": "string"
+            },
+            "byte_size": {
+                "type": "integer"
+            },
+            "uploaded_at": {
+                "type": "string"
+            },
+            "object_uuid": {
+                "type": "string"
+            },
+            "aip_uuid": {
+                "type": "string"
+            },
+            "url": {
+                "type": "string"
+            },
+            "reference_url": {
+                "type": "string"
+            },
+            "thumbnail_url": {
+                "type": "string"
+            }
+        }
+    }
+}

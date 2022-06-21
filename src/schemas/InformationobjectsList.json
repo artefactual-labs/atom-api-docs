@@ -1,0 +1,22 @@
+{
+    "InformationobjectsList": {
+        "required": [
+            "total",
+            "results"
+        ],
+        "properties": {
+            "total": {
+                "type": "integer",
+                "description": "Count of all results found",
+                "example": 1
+            },
+            "results": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "$ref": "./InformationobjectBrief.json#/InformationobjectBrief"
+                }
+            }
+        }
+    }
+}

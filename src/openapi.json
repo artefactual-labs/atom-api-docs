@@ -1,0 +1,34 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "version": "1.0.0",
+    "title": "Access to Memory API",
+    "description": "[Access to Memory](https://accesstomemory.org) REST API documentation",
+    "contact": {
+      "name": "Artefactual Systems Inc.",
+      "url": "https://www.artefactual.com",
+      "email": "info@artefactual.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "paths": {
+    "/api": {
+      "$ref": "./paths/api.json"
+    },
+    "/api/informationobjects": {
+      "$ref": "./paths/informationobjects.json"
+    },
+    "/api/informationobjects/{slug}": {
+      "$ref": "./paths/informationobjects/slug.json"
+    },
+    "/api/informationobjects/{slug}/digitalobject": {
+      "$ref": "./paths/informationobjects/slug/digitalobject.json"
+    },
+    "/api/informationobjects/tree/{slug}": {
+      "$ref": "./paths/informationobjects/tree/slug.json"
+    }
+  }
+}

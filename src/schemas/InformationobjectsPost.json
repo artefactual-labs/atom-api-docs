@@ -1,0 +1,118 @@
+{
+    "InformationobjectsPost": {
+        "properties": {
+            "identifier": {
+                "type": "string"
+            },
+            "level_of_description_id": {
+                "type": "integer"
+            },
+            "parent_id": {
+                "type": "integer"
+            },
+            "title": {
+                "type": "string"
+            },
+            "parent_slug": {
+                "type": "string",
+                "description": "Overrides parent_id if both are set"
+            },
+            "description": {
+                "type": "string",
+                "description": "Maps to ISAD(G) \"Scope and content\""
+            },
+            "format": {
+                "type": "string",
+                "description": "Maps to ISAD(G) \"Extent and medium\""
+            },
+            "source": {
+                "type": "string",
+                "description": "Maps to ISAD(G) \"Existence and location of originals\""
+            },
+            "rights": {
+                "type": "string",
+                "description": "Maps to ISAD(G) \"Conditions governing access\""
+            },
+            "names": {
+                "type": "object",
+                "description": "Name of creator, accumulator, etc.",
+                "properties": {
+                    "authorized_form_of_name": {
+                        "type": "string"
+                    },
+                    "actor_id": {
+                        "type": "string",
+                        "description": "Overrides authorized_form_of_name if both are set"
+                    },
+                    "type_id": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "dates": {
+                "type": "object",
+                "description": "Date of creation",
+                "properties": {
+                    "date": {
+                        "type": "string"
+                    },
+                    "start_date": {
+                        "type": "string"
+                    },
+                    "end_date": {
+                        "type": "string"
+                    }
+                }
+            },
+            "notes": {
+                "type": "object",
+                "properties": {
+                    "content": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "default": "General note"
+                    }
+                }
+            },
+            "types": {
+                "type": "object",
+                "description": "\"Dublin Core Types\" term id",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "level_of_description": {
+                "type": "string",
+                "description": "Overrides level_of_description_id if both are set"
+            }
+        },
+        "example": {
+            "identifier": "2",
+            "title": "Woolworth Building Sudbury, Ontario",
+            "parent_slug": "irving-steinberg-sudbury-slide-collection",
+            "description": "Item is a picture of an office building with \"Woolworths\" \"Crown Life\", and \"Confederation Life\" signs visible. People, the crossing street, and cars also can be seen in the image.",
+            "format": "1 photograph: col, mounted on slide",
+            "source": "Item has been digitized. Prints of image may be requested. Email archives@greatersudbury.ca for more information.",
+            "names": {
+                "authorized_form_of_name": "Steinberg, Israel \"Irving\"",
+                "type_id": 111
+            },
+            "dates": {
+                "date": "1961",
+                "start_date": "1961",
+                "end_date": "1961"
+            },
+            "notes": {
+                "content": "For demonstration purposes only."
+            },
+            "types": {
+                "id": 277
+            },
+            "level_of_description": "Item"
+        }
+    }
+}

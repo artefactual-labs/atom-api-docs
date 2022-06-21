@@ -1,0 +1,71 @@
+{
+    "InformationobjectsTree": {
+        "properties": {
+            "title": {
+                "type": "string"
+            },
+            "identifier": {
+                "type": "string"
+            },
+            "slug": {
+                "type": "string"
+            },
+            "children": {
+                "description": "A recursive list of children",
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "title": {
+                            "type": "string"
+                        },
+                        "identifier": {
+                            "type": "string"
+                        },
+                        "slug": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "example": {
+            "title": "Kantokoski (Koski), Koivula & Korpela Family",
+            "identifier": "016",
+            "slug": "kantokoski-koski-koivula-korpela-family-3",
+            "level": "Fonds",
+            "children": [
+                {
+                    "title": "Ann Eva Chisholm (nee Kantokoski\/Koski)",
+                    "identifier": ".1",
+                    "slug": "ann-eva-chisholm-nee-kantokoski-koski-2",
+                    "level": "Sous-fonds",
+                    "children": [
+                        {
+                            "title": "Photographs",
+                            "identifier": "1",
+                            "slug": "photographs-7",
+                            "level": "Series",
+                            "children": [
+                                {
+                                    "title": "Finland",
+                                    "identifier": "1",
+                                    "slug": "finland",
+                                    "level": "File",
+                                    "children": [
+                                        {
+                                            "title": "Mr and Mrs Koski",
+                                            "identifier": "1",
+                                            "slug": "mr-and-mrs-koski",
+                                            "level": "Item"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

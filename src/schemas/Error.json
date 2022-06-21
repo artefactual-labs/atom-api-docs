@@ -1,0 +1,52 @@
+{
+    "Error": {
+        "required": [
+            "id",
+            "message"
+        ],
+        "properties": {
+            "id": {
+                "type": "string"
+            },
+            "message": {
+                "type": "string"
+            }
+        }
+    },
+    "401NotAuthorizedError": {
+        "required": [
+            "id",
+            "message"
+        ],
+        "properties": {
+            "id": {
+                "type": "string"
+            },
+            "message": {
+                "type": "string"
+            }
+        },
+        "example": {
+            "id": "not-authorized",
+            "message": "Not authorized"
+        }
+    },
+    "500InternalError": {
+        "required": [
+            "id",
+            "message"
+        ],
+        "properties": {
+            "id": {
+                "type": "string"
+            },
+            "message": {
+                "type": "string"
+            }
+        },
+        "example": {
+            "id": "internal-error",
+            "message": "Internal error"
+        }
+    }
+}

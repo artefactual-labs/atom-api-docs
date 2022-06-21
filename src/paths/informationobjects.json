@@ -1,0 +1,120 @@
+{
+    "get": {
+        "summary": "A paged array of information objects with summary data",
+        "operationId": "informationobjectsBrowse",
+        "tags": [
+            "informationobjects"
+        ],
+        "parameters": [
+            {
+                "$ref": "../parameters/Parameters.json#/SfCulture"
+            },
+            {
+                "$ref": "../parameters/Parameters.json#/Limit"
+            },
+            {
+                "$ref": "../parameters/Parameters.json#/Skip"
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "A paged array of information objects with summary data",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../schemas/InformationobjectsList.json#/InformationobjectsList"
+                        }
+                    }
+                }
+            },
+            "401": {
+                "description": "Not authorized error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../schemas/Error.json#/401NotAuthorizedError"
+                        }
+                    }
+                }
+            },
+            "500": {
+                "description": "Internal error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../schemas/Error.json#/500InternalError"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "post": {
+        "summary": "Create a new information object",
+        "operationId": "informationbjectsCreate",
+        "tags": [
+            "informationobjects"
+        ],
+        "parameters": [
+            {
+                "$ref": "../parameters/Parameters.json#/SfCulture"
+            }
+        ],
+        "requestBody": {
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "$ref": "../schemas/InformationobjectsPost.json#/InformationobjectsPost"
+                    }
+                }
+            }
+        },
+        "responses": {
+            "201": {
+                "description": "Created",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "id": {
+                                    "type": "integer"
+                                },
+                                "slug": {
+                                    "type": "string"
+                                },
+                                "parent_id": {
+                                    "type": "integer"
+                                }
+                            },
+                            "example": {
+                                "id": 2004327,
+                                "slug": "woolworth-building-sudbury-ontario",
+                                "parent_id": 71473
+                            }
+                        }
+                    }
+                }
+            },
+            "401": {
+                "description": "Not authorized error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../schemas/Error.json#/401NotAuthorizedError"
+                        }
+                    }
+                }
+            },
+            "500": {
+                "description": "Internal error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../schemas/Error.json#/500InternalError"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

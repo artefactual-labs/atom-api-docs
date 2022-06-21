@@ -1,0 +1,56 @@
+{
+    "get": {
+        "summary": "Returns a digital object bitstream",
+        "operationId": "informationobjectsDownloadDigitalObject",
+        "tags": [
+            "informationobjects"
+        ],
+        "parameters": [
+            {
+                "$ref": "../../../parameters/Parameters.json#/Slug"
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "A binary bitstream. The actual MIME type of the response will vary based on the digital object type (e.g. \"application/pdf\" for a PDF document).",
+                "content": {
+                    "application/octet-stream": {}
+                }
+            },
+            "401": {
+                "description": "Not authorized",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../.../../../schemas/Error.json#/401NotAuthorizedError"
+                        }
+                    }
+                }
+            },
+            "404": {
+                "description": "Not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../../schemas/Error.json#/Error"
+                        },
+                        "example": {
+                            "id": "not-found",
+                            "message": "Information object not found"
+                        }
+                    }
+                }
+            },
+            "500": {
+                "description": "Internal error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../../schemas/Error.json#/500InternalError"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

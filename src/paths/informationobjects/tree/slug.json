@@ -1,0 +1,49 @@
+{
+    "get": {
+        "summary": "Recursive list of information object children",
+        "operationId": "informationobjectsTree",
+        "tags": [
+            "informationobjects"
+        ],
+        "parameters": [
+            {
+                "$ref": "../../../parameters/Parameters.json#/Slug"
+            },
+            {
+                "$ref": "../../../parameters/Parameters.json#/SfCulture"
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "OK",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../../schemas/InformationobjectsTree.json#/InformationobjectsTree"
+                        }
+                    }
+                }
+            },
+            "401": {
+                "description": "Not authorized",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../../schemas/Error.json#/401NotAuthorizedError"
+                        }
+                    }
+                }
+            },
+            "500": {
+                "description": "Internal error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../../schemas/Error.json#/500InternalError"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,67 @@
+{
+    "InformationobjectBrief": {
+        "required": [
+            "slug"
+        ],
+        "properties": {
+            "reference_code": {
+                "type": "string"
+            },
+            "slug": {
+                "type": "string"
+            },
+            "title": {
+                "type": "string"
+            },
+            "physical_characteristics": {
+                "type": "string"
+            },
+            "repository": {
+                "type": "string"
+            },
+            "level_of_description": {
+                "type": "string"
+            },
+            "creators": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "creation_dates": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "place_access_points": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "thumbnail_url": {
+                "type": "string"
+            }
+        },
+        "example": {
+            "reference_code": "CA ON00365 WCH-FAM",
+            "slug": "womens-college-hospital-department-of-family-and-community-medicine-fonds",
+            "title": "Women's College Hospital. Department of Family and Community Medicine fonds",
+            "repository": "Women's College Hospital",
+            "level_of_description": "Fonds",
+            "creators": [
+                "Women's College Hospital. Department of Family and Community Medicine"
+            ],
+            "creation_dates": [
+                "1976-1999"
+            ],
+            "place_access_points": [
+                "Toronto",
+                "York, Regional Municipality of",
+                "Ontario",
+                "Canada"
+            ]
+        }
+    }
+}

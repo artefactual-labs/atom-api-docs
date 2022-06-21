@@ -1,0 +1,51 @@
+{
+    "get": {
+        "summary": "Get AtoM version",
+        "operationId": "version",
+        "tags": [
+            "api"
+        ],
+        "responses": {
+            "200": {
+                "description": "The AtoM version number.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "required": [
+                                "version"
+                            ],
+                            "properties": {
+                                "version": {
+                                    "type": "string"
+                                }
+                            },
+                            "example": {
+                                "version": "2.6.0"
+                            }
+                        }
+                    }
+                }
+            },
+            "401": {
+                "description": "Not authorized error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../schemas/Error.json#/401NotAuthorizedError"
+                        }
+                    }
+                }
+            },
+            "500": {
+                "description": "Internal error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../schemas/Error.json#/500InternalError"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
