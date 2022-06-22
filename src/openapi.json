@@ -29,6 +29,9 @@
     },
     "/api/informationobjects/tree/{slug}": {
       "$ref": "./paths/informationobjects/tree/slug.json"
+    },
+    "/api/taxonomies/{id}": {
+      "$ref": "./paths/taxonomies/id.json"
     }
   }
 }

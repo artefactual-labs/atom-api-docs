@@ -1,0 +1,122 @@
+{
+    "get": {
+        "summary": "A list of taxonomy terms",
+        "operationId": "taxonomiesBrowse",
+        "tags": [
+            "taxonomies"
+        ],
+        "parameters": [
+            {
+                "name": "id",
+                "in": "path",
+                "description": "Primary key of the taxonomy",
+                "required": true,
+                "schema": {
+                    "type": "integer",
+                    "example": 40
+                }
+            },
+            {
+                "name": "culture",
+                "in": "query",
+                "description": "ISO language code (e.g. \"en\", \"fr\")",
+                "required": false,
+                "schema": {
+                    "type": "string",
+                    "default": "en",
+                    "minLength": 2,
+                    "maxLength": 3
+                }
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "OK",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "example": [
+                            {
+                                "name": "Accumulation"
+                            },
+                            {
+                                "name": "Broadcasting"
+                            },
+                            {
+                                "name": "Collection"
+                            },
+                            {
+                                "name": "Contribution"
+                            },
+                            {
+                                "name": "Creation"
+                            },
+                            {
+                                "name": "Custody"
+                            },
+                            {
+                                "name": "Distribution"
+                            },
+                            {
+                                "name": "Manufacturing"
+                            },
+                            {
+                                "name": "Publication"
+                            },
+                            {
+                                "name": "Record-keeping activity"
+                            },
+                            {
+                                "name": "Reproduction"
+                            }
+                        ]
+                    }
+                }
+            },
+            "401": {
+                "description": "Not authorized",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../schemas/Error.json#/401NotAuthorizedError"
+                        }
+                    }
+                }
+            },
+            "404": {
+                "description": "Not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../schemas/Error.json#/Error"
+                        },
+                        "example": {
+                            "id": "not-found",
+                            "message": "Information object not found"
+                        }
+                    }
+                }
+            },
+            "500": {
+                "description": "Internal error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../../schemas/Error.json#/500InternalError"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
