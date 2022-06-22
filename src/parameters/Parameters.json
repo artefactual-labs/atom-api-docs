@@ -10,6 +10,17 @@
             "example": 25
         }
     },
+    "Page": {
+        "name": "page",
+        "in": "query",
+        "description": "Result page to return",
+        "required": false,
+        "schema": {
+            "type": "integer",
+            "default": 1,
+            "example": 2
+        }
+    },
     "SfCulture": {
         "name": "sf_culture",
         "in": "query",

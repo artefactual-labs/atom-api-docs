@@ -1,0 +1,58 @@
+{
+    "DigitalobjectsList": {
+        "required": [
+            "total",
+            "results"
+        ],
+        "properties": {
+            "results": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "$ref": "#/DigitalobjectListitem"
+                }
+            },
+            "total": {
+                "type": "integer",
+                "description": "Count of all results found",
+                "example": 1
+            }
+        }
+    },
+    "DigitalobjectListitem": {
+        "properties": {
+            "id": {
+                "type": "integer"
+            },
+            "name": {
+                "type": "string"
+            },
+            "path": {
+                "type": "string"
+            },
+            "byte_size": {
+                "type": "integer"
+            },
+            "mime_type": {
+                "type": "string"
+            },
+            "media_type": {
+                "type": "string"
+            },
+            "file_uuid": {
+                "type": "string"
+            },
+            "aip_uuid": {
+                "type": "string"
+            }
+        },
+        "example": {
+            "id": "77957",
+            "name": "45679.jpg",
+            "path": "http:\/\/images.ourontario.ca\/Partners\/WLU\/45679.jpg",
+            "byte_size": 23666,
+            "mime_type": "image\/jpeg",
+            "media_type": "Image"
+        }
+    }
+}

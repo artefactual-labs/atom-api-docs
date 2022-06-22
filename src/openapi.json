@@ -18,6 +18,9 @@
     "/api": {
       "$ref": "./paths/api.json"
     },
+    "/api/digitalobjects": {
+      "$ref": "./paths/digitalobjects.json"
+    },
     "/api/informationobjects": {
       "$ref": "./paths/informationobjects.json"
     },

@@ -1,0 +1,115 @@
+{
+    "get": {
+        "summary": "A paged array of digital objects",
+        "operationId": "digitalobjectsBrowse",
+        "tags": [
+            "digitalobjects"
+        ],
+        "parameters": [
+            {
+                "$ref": "../parameters/Parameters.json#/Limit"
+            },
+            {
+                "$ref": "../parameters/Parameters.json#/Page"
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "OK",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../schemas/DigitalobjectsList.json#/DigitalobjectsList"
+                        }
+                    }
+                }
+            },
+            "401": {
+                "description": "Not authorized",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../schemas/Error.json#/401NotAuthorizedError"
+                        }
+                    }
+                }
+            },
+            "500": {
+                "description": "Internal error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../schemas/Error.json#/500InternalError"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "post": {
+        "summary": "Create a digital object",
+        "description": "Create a digital object. If `uri` is set, link to the external file. If `media_type` is set, AtoM will attempt to generate local derivatives (i.e. reference, thumbnail) based on the value. When using `uri` the derived properties `name`, `path`, `byte_size`, and `usage` will be set automatically and should not be included in the request body.",
+        "operationId": "digitalobjectsCreate",
+        "tags": [
+            "digitalobjects"
+        ],
+        "parameters": [],
+        "requestBody": {
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "$ref": "../schemas/DigitalobjectsPost.json"
+                    },
+                    "example": {
+                        "uri": "https://www.artefactual.com/wp-content/uploads/2018/08/atom-logo.svg",
+                        "information_object_slug": "api-test-item-1",
+                        "media_type": "Image"
+                    }
+                }
+            }
+        },
+        "responses": {
+            "201": {
+                "description": "Created",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "id": {
+                                    "type": "integer"
+                                },
+                                "slug": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "example": {
+                            "id": 2004346,
+                            "slug": "atom-logo-svg"
+                        }
+                    }
+                }
+            },
+            "401": {
+                "description": "Not authorized",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../schemas/Error.json#/401NotAuthorizedError"
+                        }
+                    }
+                }
+            },
+            "500": {
+                "description": "Internal error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "../schemas/Error.json#/500InternalError"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,80 @@
+{
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "Filename"
+        },
+        "path": {
+            "type": "string",
+            "description": "Local file path, without filename"
+        },
+        "byte_size": {
+            "type": "integer"
+        },
+        "parent_id": {
+            "type": "integer",
+            "description": "Primary key of the digital object from which this digital object is derived (e.g. the original image)"
+        },
+        "information_object_slug": {
+            "type": "string"
+        },
+        "uri": {
+            "type": "string",
+            "description": "URI of an external file - attempt to create local derivatives (reference, thubmnail)"
+        },
+        "information_object_id": {
+            "type": "integer",
+            "description": "Overrides information_object_slug if both are set"
+        },
+        "media_type": {
+            "type": "string",
+            "description": "AtoM media type",
+            "enum": [
+                "Audio",
+                "Image",
+                "Text",
+                "Video",
+                "Other"
+            ]
+        },
+        "usage": {
+            "type": "string",
+            "description": "Digital object usage type",
+            "enum": [
+                "Captions/Subtitles",
+                "Chapters",
+                "Compound",
+                "External file",
+                "External URI",
+                "Master",
+                "Offline",
+                "Reference",
+                "Thumbnail"
+            ]
+        },
+        "file_uuid": {
+            "type": "string"
+        },
+        "aip_uuid": {
+            "type": "string"
+        },
+        "format_name": {
+            "type": "string"
+        },
+        "format_version": {
+            "type": "string"
+        },
+        "format_registry_key": {
+            "type": "string"
+        },
+        "format_registry_name": {
+            "type": "string"
+        },
+        "relative_path_within_aip": {
+            "type": "string"
+        },
+        "aip_name": {
+            "type": "string"
+        }
+    }
+}
