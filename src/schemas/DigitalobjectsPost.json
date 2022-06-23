@@ -20,7 +20,7 @@
         },
         "uri": {
             "type": "string",
-            "description": "URI of an external file - attempt to create local derivatives (reference, thubmnail)"
+            "description": "URI of an external file"
         },
         "information_object_id": {
             "type": "integer",
