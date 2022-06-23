@@ -1,8 +1,6 @@
 # atom-api-docs
 Open API documentation of AtoM's REST API
 
-**N.B. This API definition is a draft and is not complete.**
-
 ## HTML interface
 
 A Swagger UI dynamic HTML interface to the AtoM API specification is available
